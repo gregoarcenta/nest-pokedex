@@ -3,7 +3,7 @@ export interface PokeResponse {
 	next: string;
 	results: PokeResult[];
 }
-export interface PokeResult {
+interface PokeResult {
 	name: string;
 	url: string;
 }

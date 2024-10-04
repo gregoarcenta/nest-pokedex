@@ -19,13 +19,15 @@ export class PokemonService {
   async create(createPokemonDto: CreatePokemonDto): Promise<PokemonDocument> {
     createPokemonDto.name = createPokemonDto.name.toLowerCase();
     try {
-      const pokemon: PokemonDocument =
-        await this.pokemonModel.create(createPokemonDto);
-
-      return pokemon;
+      return this.pokemonModel.create(createPokemonDto);
     } catch (error) {
       this.handleExceptions(error, this.create.name);
     }
+  }
+
+  async createMany(createPokemonDto: CreatePokemonDto[]) {
+    await this.pokemonModel.insertMany(createPokemonDto);
+    return 'All pokemon added';
   }
 
   async findAll(): Promise<PokemonDocument[]> {
@@ -73,11 +75,16 @@ export class PokemonService {
 
   async remove(id: string) {
     const { deletedCount } = await this.pokemonModel.deleteOne({ _id: id });
-    
+
     if (!deletedCount) {
       throw new NotFoundException(`Pokemon with id ${id} not found`);
     }
     return `Pokemon with id ${id} removed`;
+  }
+
+  async removeAll() {
+    await this.pokemonModel.deleteMany({});
+    return 'All pokemon removed';
   }
 
   private handleExceptions(error: any, method: string) {

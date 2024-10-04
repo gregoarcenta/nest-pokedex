@@ -23,8 +23,22 @@ npm i -g @nestjs/cli
 docker compose -d up
 ```
 
-5. Abrir en el navegador:
+5. Levantar el servidor de desarrollo
+
+```
+yarn start:dev
+```
+
+6. Abrir mongo Express:
 
 ```
 http://localhost:8081/
 ```
+7. Recargar o reconstruir la base de datos
+```
+http://localhost:3000/api/v2/seed
+```
+
+## Stack utilizado
+* Mongo
+* Nest
