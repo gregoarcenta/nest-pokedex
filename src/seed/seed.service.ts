@@ -19,7 +19,7 @@ export class SeedService {
       await this.pokemonService.removeAll();
       
       const response = await this.httpAdapter.get<PokeResponse>(
-        `https://pokeapi.co/api/v2/pokemon?limit=100&offset=0`,
+        `https://pokeapi.co/api/v2/pokemon?limit=500&offset=0`,
       );
       
       await this.insertResultsPokemons(response);
